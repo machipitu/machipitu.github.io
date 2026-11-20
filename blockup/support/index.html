@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BLOCK UP! サポート / Support</title>
+<meta name="description" content="ゲームアプリ「BLOCK UP!」のサポートページ。よくある質問とお問い合わせ先。">
+<meta name="theme-color" content="#1b2468">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<style>
+  :root {
+    --page: #eef2ff; --panel: #ffffff; --text: #1c2240; --muted: #5a6285; --line: #dde2f3;
+    --accent: #2f5bdc; --accent-soft: #e8eeff; --head1: #1b2468; --head2: #5a2d91;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --page: #0d1230; --panel: #161d45; --text: #eef1ff; --muted: #aab3dc; --line: #2a336a; --accent: #8fb6ff; --accent-soft: #1f2a63; }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--page); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", "Noto Sans JP", "Segoe UI", sans-serif;
+    line-height: 1.8; -webkit-font-smoothing: antialiased; overflow-wrap: anywhere;
+  }
+  a { color: var(--accent); }
+  html:not([lang="en"]) .en, html[lang="en"] .ja { display: none !important; }
+  header.brand { background: linear-gradient(135deg, var(--head1), var(--head2)); color: #fff; padding: calc(20px + env(safe-area-inset-top)) 16px 64px; }
+  .brand .inner { max-width: 820px; margin: 0 auto; display: flex; align-items: center; gap: 14px; }
+  .brand img { width: 56px; height: 56px; border-radius: 14px; box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3); }
+  .brand .app { font-weight: 800; font-size: 20px; letter-spacing: 0.03em; }
+  .brand .kind { font-size: 13px; opacity: 0.85; }
+  .brand .home { margin-left: auto; color: #fff; font-size: 13px; text-decoration: none; border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 999px; padding: 6px 12px; white-space: nowrap; }
+  .langs { max-width: 820px; margin: 14px auto 0; display: flex; gap: 6px; }
+  .langs button { font: inherit; font-size: 13px; font-weight: 700; color: #fff; background: rgba(255, 255, 255, 0.14); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 999px; padding: 4px 14px; cursor: pointer; }
+  .langs button[aria-pressed="true"] { background: #fff; color: var(--head1); }
+  main { max-width: 820px; margin: -44px auto 0; padding: 0 16px calc(48px + env(safe-area-inset-bottom)); }
+  .panel { background: var(--panel); border-radius: 20px; padding: 28px 24px; box-shadow: 0 10px 30px rgba(20, 30, 90, 0.10); }
+  @media (min-width: 700px) { .panel { padding: 40px 48px; } }
+  h1 { font-size: clamp(24px, 4.4vw, 30px); line-height: 1.35; margin: 0 0 12px; }
+  h2 { font-size: 19px; margin: 36px 0 10px; padding-top: 20px; border-top: 1px solid var(--line); }
+  p, li { font-size: 15.5px; }
+  .contact-box { background: var(--accent-soft); border-radius: 16px; padding: 18px 20px; margin: 14px 0 6px; }
+  .contact-box .mail { display: inline-block; font-weight: 800; font-size: 18px; text-decoration: none; margin: 4px 0 8px; }
+  .contact-box ul { margin: 6px 0 0; padding-left: 1.3em; }
+  details { border: 1px solid var(--line); border-radius: 14px; margin: 10px 0; background: var(--panel); }
+  summary { cursor: pointer; padding: 14px 18px; font-weight: 700; font-size: 15.5px; list-style: none; position: relative; padding-right: 44px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; position: absolute; right: 18px; top: 50%; transform: translateY(-50%); font-size: 22px; color: var(--accent); font-weight: 400; }
+  details[open] summary::after { content: "−"; }
+  details .a { padding: 0 18px 14px; }
+  details .a p { margin: 0 0 8px; }
+  .meta { color: var(--muted); font-size: 14px; }
+  footer { max-width: 820px; margin: 0 auto; padding: 0 16px 40px; color: var(--muted); font-size: 13px; text-align: center; }
+  footer a { color: var(--muted); }
+</style>
+</head>
+<body>
+
+<header class="brand">
+  <div class="inner">
+    <img src="/assets/icon.webp" alt="" width="56" height="56">
+    <div>
+      <div class="app">BLOCK UP!</div>
+      <div class="kind"><span class="ja">サポート</span><span class="en">Support</span></div>
+    </div>
+    <a class="home" href="/"><span class="ja">ゲームの紹介</span><span class="en">About the game</span></a>
+  </div>
+  <div class="langs" role="group" aria-label="Language">
+    <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+  </div>
+</header>
+
+<main>
+<!-- ======================= 日本語 ======================= -->
+<article class="panel ja" lang="ja">
+  <h1>BLOCK UP! サポート</h1>
+  <p>「BLOCK UP!」をあそんでいただき、ありがとうございます。困ったときは、まず下の「よくある質問」をご覧ください。解決しないときは、メールでお問い合わせください。</p>
+
+  <div class="contact-box">
+    <strong>お問い合わせ</strong><br>
+    <a class="mail" href="mailto:blockup.support@gmail.com?subject=BLOCK%20UP!%20%E3%81%8A%E5%95%8F%E3%81%84%E5%90%88%E3%82%8F%E3%81%9B">blockup.support@gmail.com</a>
+    <div>次のことを書いていただけると、早く解決できます。</div>
+    <ul>
+      <li>お使いの機種（例：iPhone 15）と iOS のバージョン</li>
+      <li>アプリのバージョン（タイトル画面の右下に表示されています）</li>
+      <li>ランキングのプレイヤー名（ランキングや記録についてのご質問のとき）</li>
+      <li>起きたこと、そのときの操作（できれば画面の写真も）</li>
+    </ul>
+    <p class="meta" style="margin:10px 0 0">個人で開発しているため、お返事までに数日かかることがあります。お名前や住所など、必要のない個人情報は書かないでください。</p>
+  </div>
+
+  <h2>よくある質問</h2>
+
+  <details>
+    <summary>購入したスキンや「広告削除」が使えない／消えてしまった</summary>
+    <div class="a">
+      <p>「SHOP」→「PREMIUM」の下にある「<strong>RESTORE PURCHASES</strong>」を押してください。購入したときと同じ Apple アカウントでサインインしていれば、購入した商品が戻ります。</p>
+      <p>戻らないときは、インターネットにつながっているか、App Store に購入したときの Apple アカウントでサインインしているかをご確認ください。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>機種変更をしたら、記録やコインはどうなりますか？</summary>
+    <div class="a">
+      <p>記録・コイン・コインで手に入れたスキンは、端末の中だけに保存しています。iPhone の「クイックスタート」や iCloud のバックアップから新しい iPhone に移した場合は、引き継がれることがあります。アプリを入れ直しただけでは引き継がれません。</p>
+      <p>お金で購入した商品（広告削除・有料スキン）は、「RESTORE PURCHASES」でいつでも戻せます。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>返金してほしい</summary>
+    <div class="a">
+      <p>App Store での購入の支払いは Apple が管理しているため、開発者は返金の手続きができません。<a href="https://reportaproblem.apple.com/">Apple の「問題を報告する」ページ</a>から、Apple に返金をご依頼ください。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>広告を表示しないようにしたい</summary>
+    <div class="a">
+      <p>「SHOP」→「PREMIUM」の「<strong>REMOVE ADS</strong>」を購入すると、ゲームオーバーのときの広告が出なくなり、1 回だけの復活も広告なしでできるようになります。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>広告の同意（データの使い方）を変えたい</summary>
+    <div class="a">
+      <p>欧州・英国・スイスなど、同意が必要な地域では、「SETTINGS」→「<strong>AD PRIVACY SETTINGS</strong>」からいつでも変更できます（同意が必要ない地域では、このボタンは表示されません）。くわしくは<a href="https://machipitu.github.io/blockup-privacy/#ja-ads">プライバシーポリシー</a>をご覧ください。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>ランキングの名前を変えたい／「THAT NAME CAN'T BE USED」と出る</summary>
+    <div class="a">
+      <p>「RANKING」画面から名前を変えられます。使えるのは英字（A〜Z）・数字・「_」「-」で、3〜12 文字です。</p>
+      <p>ほかのプレイヤーにも見える名前なので、悪い言葉などが入った名前は使えません。また、本名など、個人が分かる名前は使わないでください。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>世界ランキングが表示されない</summary>
+    <div class="a">
+      <p>世界ランキングにはインターネット接続が必要です。電波のよい場所で、もう一度「RANKING」を開いてください。スコアは、つながったときに自動で送り直されます。端末の中の記録は「LOCAL」のタブで見られます。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>ランキングの記録を消してほしい</summary>
+    <div class="a">
+      <p>アプリを削除しても、世界ランキングの記録は消えません。<a href="mailto:blockup.support@gmail.com?subject=BLOCK%20UP!%20%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%B3%E3%82%B0%E3%81%AE%E8%A8%98%E9%8C%B2%E3%81%AE%E5%89%8A%E9%99%A4">blockup.support@gmail.com</a> に、件名「ランキングの記録の削除」で、プレイヤー名とおよそのスコアを送ってください。確認して削除し、メールでお知らせします。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>動作環境を教えてください</summary>
+    <div class="a">
+      <p>iOS 15.0 以降の iPhone と iPad で動きます。インターネットにつながっていなくても遊べます（世界ランキングと広告を除きます）。</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>バーがうまく動かせない</summary>
+    <div class="a">
+      <p>画面をタップするとその場所へバーが動き、ドラッグすると指の動きに合わせて動きます。バーは左右だけでなく、上下にも動かせます。動きの速さは「SETTINGS」の「TOUCH SENSITIVITY」で変えられます。</p>
+    </div>
+  </details>
+
+  <h2>関連するページ</h2>
+  <ul>
+    <li><a href="https://machipitu.github.io/blockup-privacy/">プライバシーポリシー</a></li>
+    <li><a href="/">BLOCK UP! の紹介</a></li>
+  </ul>
+</article>
+
+<!-- ======================= English ======================= -->
+<article class="panel en" lang="en">
+  <h1>BLOCK UP! Support</h1>
+  <p>Thank you for playing BLOCK UP! If you have a problem, please check the FAQ below first. If that doesn't help, contact us by email.</p>
+
+  <div class="contact-box">
+    <strong>Contact</strong><br>
+    <a class="mail" href="mailto:blockup.support@gmail.com?subject=BLOCK%20UP!%20Support">blockup.support@gmail.com</a>
+    <div>Including the following helps us solve your problem faster:</div>
+    <ul>
+      <li>Your device (e.g. iPhone 15) and iOS version</li>
+      <li>The app version (shown at the bottom right of the title screen)</li>
+      <li>Your ranking player name (for questions about the ranking or records)</li>
+      <li>What happened and what you were doing (a screenshot helps)</li>
+    </ul>
+    <p class="meta" style="margin:10px 0 0">This game is made by an independent developer, so replies may take a few days. Please do not include unnecessary personal information such as your name or address.</p>
+  </div>
+
+  <h2>FAQ</h2>
+
+  <details>
+    <summary>My purchased skins or "Remove Ads" are missing</summary>
+    <div class="a">
+      <p>Tap <strong>RESTORE PURCHASES</strong> at the bottom of SHOP → PREMIUM. If you are signed in with the same Apple Account you used to buy them, your purchases will be restored.</p>
+      <p>If that doesn't work, check that you are online and signed in to the App Store with the Apple Account you used for the purchase.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>What happens to my records and coins when I change devices?</summary>
+    <div class="a">
+      <p>Records, coins and skins bought with coins are stored only on your device. They may carry over if you move to a new iPhone with Quick Start or an iCloud backup. They do not carry over if you simply reinstall the app.</p>
+      <p>Items bought with money (Remove Ads and premium skins) can always be restored with RESTORE PURCHASES.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>I want a refund</summary>
+    <div class="a">
+      <p>Payments in the App Store are handled by Apple, so the developer cannot issue refunds. Please request a refund from Apple at <a href="https://reportaproblem.apple.com/">reportaproblem.apple.com</a>.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>I don't want to see ads</summary>
+    <div class="a">
+      <p>Buy <strong>REMOVE ADS</strong> in SHOP → PREMIUM. Game-over ads stop, and the once-per-run continue no longer needs an ad.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>I want to change my ad consent choices</summary>
+    <div class="a">
+      <p>In regions where consent is required, such as the EEA, the UK and Switzerland, go to SETTINGS → <strong>AD PRIVACY SETTINGS</strong> at any time (this button only appears where consent is required). See the <a href="https://machipitu.github.io/blockup-privacy/#en-ads">Privacy Policy</a> for details.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>How do I change my ranking name? / It says "THAT NAME CAN'T BE USED"</summary>
+    <div class="a">
+      <p>You can change your name on the RANKING screen. Use 3 to 12 characters: letters (A–Z), numbers, "_" and "-".</p>
+      <p>Names are visible to other players, so names containing offensive words cannot be used. Please don't use your real name or anything that identifies you.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>The world ranking doesn't load</summary>
+    <div class="a">
+      <p>The world ranking needs an internet connection. Move to a place with a good signal and open RANKING again. Your best score is sent automatically once you are online. You can see the records on your device in the LOCAL tab.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>Please delete my ranking record</summary>
+    <div class="a">
+      <p>Deleting the app does not delete your world ranking record. Email <a href="mailto:blockup.support@gmail.com?subject=BLOCK%20UP!%20Ranking%20deletion%20request">blockup.support@gmail.com</a> with the subject "Ranking deletion request", including your player name and approximate score. We will delete it and let you know by email.</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>What are the system requirements?</summary>
+    <div class="a">
+      <p>iPhone and iPad with iOS 15.0 or later. You can play offline (except for the world ranking and ads).</p>
+    </div>
+  </details>
+
+  <details>
+    <summary>I can't control the bar well</summary>
+    <div class="a">
+      <p>Tap the screen and the bar moves there, or drag to move it with your finger. The bar moves up and down as well as left and right. You can change how fast it follows your finger with TOUCH SENSITIVITY in SETTINGS.</p>
+    </div>
+  </details>
+
+  <h2>Related pages</h2>
+  <ul>
+    <li><a href="https://machipitu.github.io/blockup-privacy/">Privacy Policy</a></li>
+    <li><a href="/">About BLOCK UP!</a></li>
+  </ul>
+</article>
+</main>
+
+<footer>&copy; 2026 yumam</footer>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll(".langs button");
+    function setLang(lang, fromUser) {
+      document.documentElement.lang = lang;
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false"); });
+      if (fromUser) { try { localStorage.setItem("lang", lang); } catch (e) {} }
+    }
+    var saved = null;
+    try { saved = localStorage.getItem("lang"); } catch (e) {}
+    var nav = (navigator.language || "ja").toLowerCase();
+    setLang(location.hash === "#en" ? "en" : (saved || (nav.indexOf("ja") === 0 ? "ja" : "en")), false);
+    buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang, true); }); });
+  })();
+</script>
+</body>
+</html>
