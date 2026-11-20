@@ -2,40 +2,327 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BLOCK UP!</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BLOCK UP! — 新感覚 爽快ブロック崩し</title>
+<meta name="description" content="画面が自動で上へ進む、新感覚のブロック崩し。バーを上下左右に動かしてボールを打ち返し、巨大ボスを倒して空の果て、そして宇宙へ。">
+<meta name="theme-color" content="#2a4fd6">
+<meta property="og:type" content="website">
+<meta property="og:title" content="BLOCK UP! — 新感覚 爽快ブロック崩し">
+<meta property="og:description" content="打ち返して、空の果てまで。巨大ボスを倒して宇宙へ駆けのぼろう。">
+<meta property="og:image" content="https://machipitu.github.io/assets/og.jpg">
+<meta property="og:url" content="https://machipitu.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@500;800&family=Fredoka:wght@600;700&display=swap" rel="stylesheet">
 <style>
-  :root { color-scheme: light dark; }
+  :root {
+    --navy: #121a4a;
+    --deep: #1b2468;
+    --violet: #5a2d91;
+    --sky: #4fb4ff;
+    --sky-light: #9fdcff;
+    --gold: #ffcf3f;
+    --gold-dark: #e89a12;
+    --pink: #ff6fb5;
+    --text: #ffffff;
+    --muted: #c9d3ff;
+    --card: rgba(255, 255, 255, 0.08);
+    --card-line: rgba(255, 255, 255, 0.16);
+    --radius: 22px;
+    color-scheme: dark;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic", "Segoe UI", sans-serif;
-    background: linear-gradient(#182a6e, #5c2e8c);
-    color: #fff;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    background: var(--navy);
+    color: var(--text);
+    font-family: "M PLUS Rounded 1c", "Hiragino Maru Gothic ProN", "Yu Gothic", system-ui, sans-serif;
+    font-weight: 500;
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
   }
-  main { padding: 32px 16px; max-width: 560px; }
-  h1 { font-size: 2.6rem; margin: 0 0 8px; letter-spacing: 0.04em; }
-  p { line-height: 1.7; margin: 8px 0; }
-  .sub { color: #ffd666; font-weight: bold; }
-  a { color: #9fd8ff; }
-  footer { margin-top: 32px; font-size: 0.85rem; opacity: 0.8; }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: var(--sky-light); }
+  .wrap { width: min(1080px, 100% - 32px); margin-inline: auto; }
+  /* 言語ごとの文字（ほかの display 指定より強くする） */
+  html:not([lang="en"]) .en, html[lang="en"] .ja { display: none !important; }
+
+  /* 言語の切り替え */
+  .lang {
+    position: fixed; top: max(14px, env(safe-area-inset-top)); right: 14px; z-index: 20;
+    display: flex; background: rgba(10, 16, 60, 0.55); border: 1px solid var(--card-line);
+    border-radius: 999px; padding: 4px; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+  }
+  .lang button {
+    font: 700 13px/1 "Fredoka", sans-serif; letter-spacing: 0.06em; color: var(--muted);
+    background: none; border: 0; padding: 8px 12px; border-radius: 999px; cursor: pointer;
+  }
+  .lang button[aria-pressed="true"] { background: #fff; color: var(--deep); }
+
+  /* いちばん上 */
+  .hero {
+    position: relative; min-height: 100svh; display: grid; place-items: center; text-align: center;
+    padding: 96px 16px 120px; overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(40, 90, 220, 0.15) 0%, rgba(18, 26, 74, 0) 55%, var(--navy) 100%),
+      url("assets/hero_sky.jpg") center / cover no-repeat;
+  }
+  .hero .logo { width: min(560px, 92vw); margin: 0 auto; filter: drop-shadow(0 18px 30px rgba(10, 20, 80, 0.45)); animation: bob 4s ease-in-out infinite; }
+  .hero .tag {
+    margin: 18px auto 0; font-weight: 800; font-size: clamp(22px, 4.6vw, 36px); line-height: 1.35;
+    text-shadow: 0 3px 0 rgba(20, 30, 110, 0.55), 0 8px 24px rgba(10, 20, 80, 0.5);
+  }
+  .hero .sub { margin: 10px auto 0; color: #fff; font-size: clamp(14px, 2.6vw, 17px); text-shadow: 0 2px 10px rgba(10, 20, 80, 0.7); max-width: 34em; }
+  .store {
+    display: inline-flex; align-items: center; gap: 12px; margin-top: 30px; padding: 12px 22px 12px 14px;
+    background: linear-gradient(180deg, #fff3a6 0%, var(--gold) 45%, var(--gold-dark) 100%);
+    color: #3a2400; border-radius: 18px; text-decoration: none; font-weight: 800;
+    box-shadow: 0 6px 0 #b86f00, 0 14px 30px rgba(120, 60, 0, 0.35);
+  }
+  .store img { width: 44px; height: 44px; border-radius: 11px; }
+  .store small { display: block; font-size: 12px; font-weight: 500; opacity: 0.8; line-height: 1.2; }
+  .store span { display: block; font-size: 18px; line-height: 1.2; }
+  .mon { position: absolute; width: clamp(70px, 11vw, 120px); filter: drop-shadow(0 10px 14px rgba(10, 20, 80, 0.35)); animation: float 5s ease-in-out infinite; pointer-events: none; }
+  .mon.m1 { left: 6%; top: 22%; }
+  .mon.m2 { right: 7%; top: 30%; animation-delay: -1.6s; }
+  .mon.m3 { left: 10%; bottom: 18%; animation-delay: -3s; width: clamp(56px, 8vw, 90px); }
+  /* スマホでは文字に重ならないよう、上の角に小さく置く */
+  @media (max-width: 700px) {
+    .mon { width: 58px; }
+    .mon.m1 { left: 4%; top: 9%; }
+    .mon.m2 { right: 4%; top: 13%; }
+    .mon.m3 { display: none; }
+  }
+  .scroll-hint { position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%); font: 600 12px "Fredoka", sans-serif; letter-spacing: 0.2em; color: var(--muted); }
+  .scroll-hint::after { content: ""; display: block; width: 2px; height: 26px; margin: 8px auto 0; background: linear-gradient(var(--muted), transparent); }
+  @keyframes bob { 50% { transform: translateY(-10px); } }
+  @keyframes float { 0%, 100% { transform: translateY(0) rotate(-3deg); } 50% { transform: translateY(-16px) rotate(3deg); } }
+
+  /* 見出し */
+  section { padding: 84px 0; position: relative; }
+  .eyebrow { font: 700 13px "Fredoka", sans-serif; letter-spacing: 0.28em; color: var(--gold); text-align: center; }
+  h2 { margin: 6px 0 12px; text-align: center; font-weight: 800; font-size: clamp(24px, 5vw, 40px); line-height: 1.3; text-wrap: balance; word-break: auto-phrase; }
+  .lead { text-align: center; color: var(--muted); max-width: 36em; margin: 0 auto 40px; }
+
+  /* 画面 */
+  .shots { display: flex; gap: 18px; overflow-x: auto; scroll-snap-type: x mandatory; padding: 8px 16px 22px; margin: 0 -16px; scrollbar-width: thin; }
+  .shots figure { flex: 0 0 auto; width: min(230px, 62vw); margin: 0; scroll-snap-align: center; }
+  .shots img { border-radius: 26px; border: 4px solid #fff; box-shadow: 0 18px 40px rgba(0, 0, 0, 0.45); aspect-ratio: 390 / 847; object-fit: cover; background: var(--deep); }
+  .shots figcaption { text-align: center; font-size: 14px; color: var(--muted); margin-top: 10px; }
+  @media (min-width: 1000px) { .shots figure { width: 160px; } .shots { justify-content: space-between; overflow-x: visible; } }
+
+  /* 特長 */
+  .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 18px; }
+  .feature { background: var(--card); border: 1px solid var(--card-line); border-radius: var(--radius); padding: 26px 22px; }
+  .feature .num { font: 700 14px "Fredoka", sans-serif; color: var(--pink); letter-spacing: 0.14em; }
+  .feature h3 { margin: 4px 0 8px; font-size: 20px; font-weight: 800; line-height: 1.4; }
+  .feature p { margin: 0; color: var(--muted); font-size: 15px; }
+
+  /* ステージ */
+  .stages { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; }
+  .stage { position: relative; border-radius: var(--radius); overflow: hidden; aspect-ratio: 3 / 4; box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35); }
+  .stage img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s; }
+  .stage:hover img { transform: scale(1.06); }
+  .stage .label { position: absolute; inset: auto 0 0 0; padding: 40px 12px 14px; background: linear-gradient(transparent, rgba(8, 12, 40, 0.85)); }
+  .stage .no { font: 700 12px "Fredoka", sans-serif; letter-spacing: 0.18em; color: var(--gold); }
+  .stage .name { font: 700 clamp(15px, 1.8vw, 19px) "Fredoka", sans-serif; letter-spacing: 0.04em; line-height: 1.2; }
+  @media (max-width: 760px) {
+    .stages { grid-template-columns: none; grid-auto-flow: column; grid-auto-columns: 46%; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 12px; }
+    .stage { scroll-snap-align: start; }
+  }
+
+  /* ボス */
+  .bosses-bg { background: radial-gradient(ellipse at 50% 0%, rgba(120, 60, 200, 0.45), transparent 60%), linear-gradient(180deg, var(--navy), #1a1040 60%, var(--navy)); }
+  .bosses { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  @media (min-width: 760px) { .bosses { grid-template-columns: repeat(3, 1fr); gap: 18px; } }
+  @media (min-width: 1000px) { .bosses { grid-template-columns: repeat(5, 1fr); } .boss h3 { font-size: 18px; } }
+  @media (max-width: 759px) { .boss { padding: 12px 10px 14px; } .boss h3 { font-size: 16px; } }
+  .boss { background: var(--card); border: 1px solid var(--card-line); border-radius: var(--radius); padding: 18px 18px 20px; text-align: center; }
+  .boss img { width: 100%; aspect-ratio: 520 / 290; object-fit: contain; filter: drop-shadow(0 12px 18px rgba(0, 0, 0, 0.45)); }
+  .boss .alt { font: 700 12px "Fredoka", sans-serif; letter-spacing: 0.18em; color: var(--pink); margin-top: 6px; }
+  .boss h3 { margin: 2px 0 0; font: 700 22px "Fredoka", sans-serif; letter-spacing: 0.05em; }
+  .boss.secret { background: repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.04) 0 10px, rgba(255, 255, 255, 0.07) 10px 20px); border-style: dashed; }
+  .boss.secret h3 { color: var(--muted); }
+
+  /* アイテム */
+  .items { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 14px; }
+  @media (min-width: 1000px) { .items { grid-template-columns: repeat(7, 1fr); } .item img { width: 96px; } }
+  .item { background: var(--card); border: 1px solid var(--card-line); border-radius: 18px; padding: 16px 12px; text-align: center; }
+  .item img { width: 104px; margin: 0 auto 8px; filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.35)); }
+  .item h3 { margin: 0; font: 700 16px "Fredoka", sans-serif; letter-spacing: 0.05em; }
+  .item p { margin: 4px 0 0; font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* 最後 */
+  .cta { text-align: center; background: linear-gradient(180deg, var(--navy), var(--violet)); padding-bottom: 96px; }
+  .cta .icon { width: 120px; height: 120px; border-radius: 28px; margin: 0 auto 18px; box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45); }
+  footer { background: #0c1238; color: var(--muted); font-size: 14px; padding: 36px 0 calc(36px + env(safe-area-inset-bottom)); }
+  footer .wrap { display: flex; flex-wrap: wrap; gap: 14px 28px; justify-content: space-between; align-items: center; }
+  footer nav { display: flex; flex-wrap: wrap; gap: 8px 22px; }
+  footer a { color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255, 255, 255, 0.3); }
+
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; } html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
+
+<div class="lang" role="group" aria-label="Language">
+  <button type="button" data-lang="ja" aria-pressed="true">日本語</button>
+  <button type="button" data-lang="en" aria-pressed="false">EN</button>
+</div>
+
+<header class="hero">
+  <img class="mon m1" src="assets/mon_area0.webp" alt="" width="200" height="200">
+  <img class="mon m2" src="assets/mon_rare_gold.webp" alt="" width="200" height="200">
+  <img class="mon m3" src="assets/mon_atk_bee.webp" alt="" width="200" height="200">
+  <div>
+    <h1 style="margin:0"><img class="logo" src="assets/logo.webp" alt="BLOCK UP!" width="760" height="464"></h1>
+    <p class="tag"><span class="ja">打ち返して、空の果てまで。</span><span class="en">Bounce your way to the sky.</span></p>
+    <p class="sub">
+      <span class="ja">画面が自動で上へ進む、新感覚 爽快ブロック崩し。<br>巨大ボスを倒して、空から宇宙へ駆けのぼろう！</span>
+      <span class="en">A brick breaker that climbs on its own.<br>Beat giant bosses and soar from the sky into outer space!</span>
+    </p>
+    <a class="store" href="#play">
+      <img src="assets/icon.webp" alt="" width="256" height="256">
+      <div style="text-align:left">
+        <small class="ja">iPhone・iPad</small><small class="en">iPhone &amp; iPad</small>
+        <span class="ja">App Store で近日公開</span><span class="en">Coming soon to the App Store</span>
+      </div>
+    </a>
+  </div>
+  <div class="scroll-hint">SCROLL</div>
+</header>
+
 <main>
-  <h1>BLOCK UP!</h1>
-  <p class="sub">新感覚 爽快ブロック崩し / Sky-Climbing Brick Breaker</p>
-  <p>画面が自動で上へ進む、新しいブロック崩し。バーを上下左右に動かしてボールを打ち返し、巨大ボスを倒して空の果て、そして宇宙へ。</p>
-  <p>A brick breaker that climbs on its own. Move your bar anywhere, beat giant bosses and soar from the sky into outer space.</p>
-  <p>
-    <a href="https://machipitu.github.io/blockup-privacy/">プライバシーポリシー / Privacy Policy</a>
-  </p>
-  <p>お問い合わせ / Contact: <a href="mailto:blockup.support@gmail.com">blockup.support@gmail.com</a></p>
-  <footer>&copy; 2026 yumam</footer>
+  <section id="screens">
+    <div class="wrap">
+      <div class="eyebrow">SCREENSHOTS</div>
+      <h2><span class="ja">ゲーム画面</span><span class="en">Screenshots</span></h2>
+      <div class="shots">
+        <figure><img src="assets/shot_1.webp" alt="タイトル画面" loading="lazy" width="390" height="847"><figcaption><span class="ja">タイトル</span><span class="en">Title</span></figcaption></figure>
+        <figure><img src="assets/shot_2.webp" alt="プレイ画面" loading="lazy" width="390" height="847"><figcaption><span class="ja">バーは上下左右に自由自在</span><span class="en">Move the bar anywhere</span></figcaption></figure>
+        <figure><img src="assets/shot_3.webp" alt="ボス戦" loading="lazy" width="390" height="847"><figcaption><span class="ja">巨大ボスとバトル</span><span class="en">Epic boss battles</span></figcaption></figure>
+        <figure><img src="assets/shot_4.webp" alt="雷のステージ" loading="lazy" width="390" height="847"><figcaption><span class="ja">アイテムで大量コンボ</span><span class="en">Power-ups and combos</span></figcaption></figure>
+        <figure><img src="assets/shot_5.webp" alt="宇宙のステージ" loading="lazy" width="390" height="847"><figcaption><span class="ja">空から宇宙、その先へ</span><span class="en">From the sky to space</span></figcaption></figure>
+        <figure><img src="assets/shot_6.webp" alt="ショップ" loading="lazy" width="390" height="847"><figcaption><span class="ja">スキンを着せかえ</span><span class="en">Collect skins</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <section id="features">
+    <div class="wrap">
+      <div class="eyebrow">FEATURES</div>
+      <h2><span class="ja">BLOCK UP! のここがおもしろい</span><span class="en">What makes it fun</span></h2>
+      <div class="features">
+        <div class="feature">
+          <div class="num">01</div>
+          <h3><span class="ja">自動で上へ進むブロック崩し</span><span class="en">A brick breaker that climbs</span></h3>
+          <p><span class="ja">画面はどんどん上へ。ブロックを壊しながら、どこまで高くのぼれるかに挑戦。</span><span class="en">The screen keeps scrolling upward. Smash bricks and see how high you can climb.</span></p>
+        </div>
+        <div class="feature">
+          <div class="num">02</div>
+          <h3><span class="ja">バーは上下左右に自由自在</span><span class="en">Move the bar anywhere</span></h3>
+          <p><span class="ja">タップでもドラッグでも。左右だけでなく上下にも動かせるから、新しい手ごたえ。</span><span class="en">Tap or drag. The bar moves up and down too, giving the classic genre a fresh feel.</span></p>
+        </div>
+        <div class="feature">
+          <div class="num">03</div>
+          <h3><span class="ja">巨大ボスとのバトル</span><span class="en">Giant boss battles</span></h3>
+          <p><span class="ja">突進・落石・炎のブレス・ワープ攻撃。弱点が開いたしゅんかんをねらえ！</span><span class="en">Dodge charges, rocks, fire breath and teleports, then strike the core when it opens!</span></p>
+        </div>
+        <div class="feature">
+          <div class="num">04</div>
+          <h3><span class="ja">世界ランキング</span><span class="en">World ranking</span></h3>
+          <p><span class="ja">ハイスコアを世界中のプレイヤーと競おう。自分のベストの高さには目印が出る。</span><span class="en">Compete with players around the world. A marker shows your best height.</span></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="stages">
+    <div class="wrap">
+      <div class="eyebrow">STAGES</div>
+      <h2><span class="ja">空から宇宙、その先へ</span><span class="en">From the sky to outer space</span></h2>
+      <p class="lead"><span class="ja">ステージごとに景色も音楽も変わり、雷や隕石、ふしぎなモンスターがじゃまをしてくる。さらに高くのぼると……？</span><span class="en">Every stage brings new scenery, music and hazards like lightning, meteors and mischievous monsters. Climb even higher and...?</span></p>
+      <div class="stages">
+        <div class="stage"><img src="assets/stage_sky.jpg" alt="" loading="lazy" width="420" height="560"><div class="label"><div class="no">STAGE 1</div><div class="name">BLUE SKY</div></div></div>
+        <div class="stage"><img src="assets/stage_ruins.jpg" alt="" loading="lazy" width="420" height="560"><div class="label"><div class="no">STAGE 2</div><div class="name">FLOATING RUINS</div></div></div>
+        <div class="stage"><img src="assets/stage_thunder.jpg" alt="" loading="lazy" width="420" height="560"><div class="label"><div class="no">STAGE 3</div><div class="name">THUNDER STORM</div></div></div>
+        <div class="stage"><img src="assets/stage_space.jpg" alt="" loading="lazy" width="420" height="560"><div class="label"><div class="no">STAGE 4</div><div class="name">OUTER SPACE</div></div></div>
+        <div class="stage"><img src="assets/stage_unknown.jpg" alt="" loading="lazy" width="420" height="560"><div class="label"><div class="no">STAGE 5</div><div class="name">UNKNOWN</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="bosses" class="bosses-bg">
+    <div class="wrap">
+      <div class="eyebrow">BOSSES</div>
+      <h2><span class="ja">立ちはだかる巨大ボス</span><span class="en">Giant bosses stand in your way</span></h2>
+      <div class="bosses">
+        <div class="boss"><img src="assets/boss_golem.webp" alt="STONE GOLEM" loading="lazy" width="520" height="290"><div class="alt">2000 m</div><h3>STONE GOLEM</h3></div>
+        <div class="boss"><img src="assets/boss_dragon.webp" alt="MECHA DRAGON" loading="lazy" width="520" height="289"><div class="alt">3000 m</div><h3>MECHA DRAGON</h3></div>
+        <div class="boss"><img src="assets/boss_spacecore.webp" alt="SPACE CORE" loading="lazy" width="520" height="290"><div class="alt">4000 m</div><h3>SPACE CORE</h3></div>
+        <div class="boss"><img src="assets/boss_overlord.webp" alt="OVERLORD" loading="lazy" width="520" height="290"><div class="alt">5000 m</div><h3>OVERLORD</h3></div>
+        <div class="boss secret"><img src="assets/boss_secret.webp" alt="" loading="lazy" width="520" height="291"><div class="alt">??? m</div><h3>???</h3></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="items">
+    <div class="wrap">
+      <div class="eyebrow">POWER-UPS</div>
+      <h2><span class="ja">爽快アイテムで一気に壊せ</span><span class="en">Smash it all with power-ups</span></h2>
+      <div class="items">
+        <div class="item"><img src="assets/item_multiball.webp" alt="" loading="lazy" width="160" height="72"><h3>MULTI BALL</h3><p><span class="ja">ボールが一気に増える</span><span class="en">More balls at once</span></p></div>
+        <div class="item"><img src="assets/item_fireball.webp" alt="" loading="lazy" width="160" height="72"><h3>FIRE BALL</h3><p><span class="ja">ブロックを焼きつくす</span><span class="en">Burns through bricks</span></p></div>
+        <div class="item"><img src="assets/item_elecball.webp" alt="" loading="lazy" width="160" height="72"><h3>ELEC BALL</h3><p><span class="ja">まわりに電撃</span><span class="en">Shocks nearby bricks</span></p></div>
+        <div class="item"><img src="assets/item_laserbar.webp" alt="" loading="lazy" width="160" height="72"><h3>LASER BAR</h3><p><span class="ja">バーからレーザー</span><span class="en">Fire lasers from the bar</span></p></div>
+        <div class="item"><img src="assets/item_widebar.webp" alt="" loading="lazy" width="160" height="72"><h3>WIDE BAR</h3><p><span class="ja">バーが長くなる</span><span class="en">A longer bar</span></p></div>
+        <div class="item"><img src="assets/item_shield.webp" alt="" loading="lazy" width="160" height="72"><h3>SHIELD</h3><p><span class="ja">落ちたボールを守る</span><span class="en">Saves a falling ball</span></p></div>
+        <div class="item"><img src="assets/item_smash.webp" alt="" loading="lazy" width="160" height="72"><h3>SMASH</h3><p><span class="ja">ブロックをつらぬく</span><span class="en">Pierces through bricks</span></p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="play" class="cta">
+    <div class="wrap">
+      <img class="icon" src="assets/icon.webp" alt="BLOCK UP! のアイコン" width="256" height="256">
+      <h2><span class="ja">App Store で近日公開</span><span class="en">Coming soon to the App Store</span></h2>
+      <p class="lead" style="margin-bottom:0">
+        <span class="ja">基本プレイ無料（広告あり・アプリ内課金あり）。iPhone・iPad に対応しています。</span>
+        <span class="en">Free to play with ads and optional in-app purchases. For iPhone and iPad.</span>
+      </p>
+    </div>
+  </section>
 </main>
+
+<footer>
+  <div class="wrap">
+    <div>&copy; 2026 yumam</div>
+    <nav>
+      <a href="https://machipitu.github.io/blockup-privacy/"><span class="ja">プライバシーポリシー</span><span class="en">Privacy Policy</span></a>
+      <a href="mailto:blockup.support@gmail.com"><span class="ja">お問い合わせ</span><span class="en">Contact</span></a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll(".lang button");
+    function setLang(lang) {
+      document.documentElement.lang = lang;
+      buttons.forEach(function (b) { b.setAttribute("aria-pressed", b.dataset.lang === lang ? "true" : "false"); });
+      try { localStorage.setItem("lang", lang); } catch (e) {}
+    }
+    var saved = null;
+    try { saved = localStorage.getItem("lang"); } catch (e) {}
+    var nav = (navigator.language || "ja").toLowerCase();
+    setLang(saved || (nav.indexOf("ja") === 0 ? "ja" : "en"));
+    buttons.forEach(function (b) { b.addEventListener("click", function () { setLang(b.dataset.lang); }); });
+  })();
+</script>
 </body>
 </html>
